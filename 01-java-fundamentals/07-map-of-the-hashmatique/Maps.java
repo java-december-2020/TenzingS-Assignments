@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Hashmatique {
+public class Maps{
     public static void Challange() {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("Mr. Moom", "Its a real cold moon...");

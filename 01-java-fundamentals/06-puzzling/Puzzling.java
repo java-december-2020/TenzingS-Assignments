@@ -1,88 +1,89 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.ArrayList; 
+import java.util.Collections; 
+import java.util.Arrays; 
 import java.util.Random;
 
-public class Puzzling {
-	public static Character[] alphabet = {
-		'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
-	};
-	public static void main(String[] args) {
-		String[] names = { "Nancy", "Jinchi", "Fujibayashi", "Momochi", "Ishikawa" };
-		int[] nums = {3,5,1,2,7,9,8,13,25,32};
-		
-		AlphabetPuzzle();
-	}
-    public static ArrayList<Integer> TrimArray(int[] numbers, int bound) {
-        // returns array list with values greater than bound
-        ArrayList<Integer> newList = new ArrayList<Integer>();
-        for(int num : numbers) {
-            if(num < bound)
-                newList.add(num);
+public class Puzzling{
+
+    public static ArrayList<Integer> sumAndMoreThan10(int[] arr){
+        int sum = 0;
+        for(int i = 0; i < arr.length; i++){
+            sum = sum + arr[i];
+        System.out.println(sum); 
+            }
+            ArrayList<Integer> newArr = new ArrayList<Integer>(); 
+        for(int j = 0; j < arr.length; j++){
+            if(arr[j] > 10){
+                newArr.add(arr[j]);
+            }
         }
-        return newList;
+        return newArr;
     }
+public static void shuffleLessThanFive(String[] y) {
+    Collections.shuffle(Arrays.asList(y));
+    System.out.println(Arrays.asList(y));
+    
+    ArrayList<String> newArr = new ArrayList<String>();
 
-	public static int[] ArrayPuzzle(int[] numbers) {
-		int sum = Basics.GetArraySum(numbers);
-		System.out.println(sum + " is sum of numbers");
-		// allocate new array size for the number of values greater than 10
-		int[] newArr = new int[Basics.GreaterThanY(numbers, 10)];
-		int j = 0;
-		for(int i = 0; i < numbers.length; i++) {
-			if(numbers[i] > 10) {
-				newArr[j] = numbers[i];
-				j++;
-			}
-		}
-		return newArr;
-	}
-
-	public static void AlphabetPuzzle() {
-		shuffeArray(alphabet);
-		System.out.println(String.format("%s is first", alphabet[0]));
-		System.out.println(String.format("%s is last", alphabet[25]));
-		if(isVowel(alphabet[0]))
-			System.out.println("ITS A VOWEL");
-	}
-
-
-
-	public static void shuffeArray(Object[] arr) {
-		Random r = new Random();
-		for(int i = 0; i < arr.length/2; i++) {
-			Object temp = arr[i];
-			int randomIdx = r.nextInt(arr.length - i) + i;
-			arr[i] = arr[randomIdx];
-			arr[randomIdx] = temp;
-		}
-	}
-
-    public static int[] RandomIntArray(int lowerBound, int upperBound) {
-        int[] arr = new int[10];
-        int offset = upperBound - lowerBound;
+    for(int i = 0; i < y.length; i++) {
+        String currString = y[i];
+        if(currString.length() > 5){
+            newArr.add(currString);
+        }
+    }
+    System.out.println(Arrays.asList(newArr));
+    }
+    public static void alphabetPuzzle(){
+        ArrayList<Character> alphabet = new ArrayList<Character>();
+        for(Character ch = 'a'; ch <= 'z'; ch++){
+            alphabet.add(ch);
+            }
+            Collections.shuffle(alphabet);
+            System.out.println(alphabet.get(25));
+            if (alphabet.get(0).equals('a') || alphabet.get(0).equals('e') || alphabet.get(0).equals('i') || alphabet.get(0).equals('o') || alphabet.get(0).equals('u')) {
+                System.out.println(alphabet.get(0) + " is a vowel!");
+            }else{
+                System.out.println(alphabet.get(0));
+            }
+    }
+    
+    public static int[] randomIntArr(int a, int b){
+        int[] newArr = new int[10];
+        int boundary = b - a; 
         Random r = new Random();
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = r.nextInt(offset) + lowerBound;
+
+        for(int i = 0;i < newArr.length; i++){
+            int randomNum = r.nextInt(boundary);
+            newArr[i] = randomNum + a;
         }
-        Arrays.sort(arr);
-        return arr; 
+        Arrays.toString(newArr); 
+        return newArr; 
+    }        
+
+    public static void sortArray(int[] x){
+        Arrays.sort(x);
+        System.out.println(Arrays.toString(x)); 
+        System.out.println(x[0]);
+        System.out.println(x[x.length-1]);
     }
-    public static String[] RandomStringArr() {
-        String[] arr = new String[10];
-        for (int i = 0; i < arr.length; i++)
-            arr[i] = StringManipulator.RandomString(5);
-        return arr;
-	}
-	private static boolean isVowel(char letter) {
-		Random r = new Random();
-		return (
-			letter == 'a' ||
-			letter == 'e' ||
-			letter == 'i' ||
-			letter == 'o' ||
-			letter == 'u' ||
-			// y is sometimes a vowel lol
-			(letter == 'y' && r.nextInt(2) == 1)
-			);
-	}
+
+    public static String generateRandomChars(String candidateChars, int length) {
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            sb.append(candidateChars.charAt(random.nextInt(candidateChars.length())));
+        }
+    
+        return sb.toString();
+    }
+
+    public static void randStringArray(int length){
+        ArrayList<String> ranStrArr = new ArrayList<String>();
+        for(int k = 0; k < length; k++){
+            ranStrArr.add(generateRandomChars("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",5));
+        }
+        System.out.println(ranStrArr);
+    }
+
 }
+
